@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
   LoadDate();
   wrapper = document.querySelector("#wrapper");
   initNavbar();
-  constructMainRouteContent(location.pathname)
+  constructMainRouteContent(location.pathname);
 });
 
 function initNavbar() {
@@ -20,7 +20,7 @@ function initNavbar() {
     link.addEventListener("click", function (evt) {
       evt.preventDefault();
       console.log(evt);
-      constructMainRouteContent(evt.target.attributes["href"].value) 
+      constructMainRouteContent(evt.target.attributes["href"].value);
       history.pushState(null, "", evt.target.attributes["href"].value);
     });
   });
@@ -46,15 +46,13 @@ function loadDOMThumbnail() {
   wrapper.innerHTML = "<h1>Thumbnail</h1>";
 }
 function loadDOMHome() {
-  var xhr=new XMLHttpRequest()
-xhr.open('GET', '/src/pages/home/home.html')
-xhr.onreadystatechange=function(evt) {
-  if(evt.target.readyState<XMLHttpRequest.DONE)return;
-  if(evt.target.status!==200)return;  
-  wrapper.innerHTML=evt.target.responseText
-  //console.log(evt.target.readyState, evt.target.status,evt.target.responseText)
-
-}
-xhr.send()
- 
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", "/src/pages/home/home.html");
+  xhr.onreadystatechange = function (evt) {
+    if (evt.target.readyState < XMLHttpRequest.DONE) return;
+    if (evt.target.status !== 200) return;
+    wrapper.innerHTML = evt.target.responseText;
+    //console.log(evt.target.readyState, evt.target.status,evt.target.responseText)
+  };
+  xhr.send();
 }
