@@ -1,5 +1,5 @@
 console.log('coucou')
-var wrapper = document.querySelector('#wrapper')
+var wrapper;
 function LoadDate() {
     var footer = document.querySelector('footer')
     setInterval(function () {
@@ -9,7 +9,19 @@ function LoadDate() {
 
 document.addEventListener('DOMContentLoaded', function () {
     LoadDate();
-})
+    wrapper= document.querySelector('#wrapper');
+    initNavbar()
+ })
+
+function initNavbar(){
+    var links=document.querySelectorAll('nav a')
+    links.forEach(function(link){
+        link.addEventListener('click',function(evt){
+            evt.preventDefault();
+            console.log(evt)
+        })
+    })
+}
 
 function loadDOMEditor() {
     wrapper.innerHTML = '<h1>Editor</h1>'
