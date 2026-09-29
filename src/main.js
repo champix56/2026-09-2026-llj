@@ -41,11 +41,11 @@ function constructMainRouteContent(path) {
   }
 }
 function loadDOMEditor() {
-  loader.loadTemplate("/src/pages/editor/editor.html", wrapper);
+  loader.loadTemplate("/src/pages/editor/editor.html", ()=>{initForm()});
 }
 function loadDOMThumbnail() {
   wrapper.innerHTML = "<h1>Thumbnail</h1>";
 }
 function loadDOMHome() {
-  loader.loadTemplate("/src/pages/home/home.html", wrapper);
+  loader.loadTemplate("/src/pages/home/home.html");
 }

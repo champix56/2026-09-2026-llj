@@ -1,6 +1,6 @@
 function TemplateLoader() {
   this.wrapper = undefined;
-  const loadTemplate=(url)=> {
+  const loadTemplate=(url, callback)=> {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", url);
     xhr.onreadystatechange =  (evt)=> {
@@ -9,6 +9,7 @@ function TemplateLoader() {
       console.log(this);
       //console.log(evt.target.readyState, evt.target.status,evt.target.responseText)
       putContentInWrapper(evt.target.responseText);
+      if(callback)callback()
     };
     xhr.send();
   }
