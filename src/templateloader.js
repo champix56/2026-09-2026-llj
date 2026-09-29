@@ -1,9 +1,9 @@
 function TemplateLoader() {
   this.wrapper = undefined;
-  function loadTemplate(url) {
-    var xhr = new XMLHttpRequest();
+  const loadTemplate=(url)=> {
+    const xhr = new XMLHttpRequest();
     xhr.open("GET", url);
-    xhr.onreadystatechange = function (evt) {
+    xhr.onreadystatechange =  (evt)=> {
       if (evt.target.readyState < XMLHttpRequest.DONE) return;
       if (evt.target.status !== 200) return;
       console.log(this);
@@ -12,9 +12,9 @@ function TemplateLoader() {
     };
     xhr.send();
   }
-  function putContentInWrapper(content) {
+  const putContentInWrapper=(content)=> {
     this.wrapper.innerHTML = content;
   }
   this.loadTemplate = loadTemplate;
 }
-var loader = new TemplateLoader();
+const loader = new TemplateLoader();
