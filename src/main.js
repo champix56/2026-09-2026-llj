@@ -41,7 +41,7 @@ function constructMainRouteContent(path) {
   }
 }
 function loadDOMEditor() {
-  wrapper.innerHTML = "<h1>Editor</h1>";
+  loader.loadTemplate("/src/pages/editor/editor.html", wrapper);
 }
 function loadDOMThumbnail() {
   wrapper.innerHTML = "<h1>Thumbnail</h1>";
