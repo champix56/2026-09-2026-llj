@@ -10,6 +10,7 @@ function LoadDate() {
 document.addEventListener("DOMContentLoaded", function () {
   LoadDate();
   wrapper = document.querySelector("#wrapper");
+  loader.wrapper=wrapper
   initNavbar();
   constructMainRouteContent(location.pathname);
 });
@@ -46,5 +47,5 @@ function loadDOMThumbnail() {
   wrapper.innerHTML = "<h1>Thumbnail</h1>";
 }
 function loadDOMHome() {
-  loadTemplate("/src/pages/home/home.html", wrapper);
+  loader.loadTemplate("/src/pages/home/home.html", wrapper);
 }
