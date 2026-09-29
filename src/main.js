@@ -46,13 +46,5 @@ function loadDOMThumbnail() {
   wrapper.innerHTML = "<h1>Thumbnail</h1>";
 }
 function loadDOMHome() {
-  var xhr = new XMLHttpRequest();
-  xhr.open("GET", "/src/pages/home/home.html");
-  xhr.onreadystatechange = function (evt) {
-    if (evt.target.readyState < XMLHttpRequest.DONE) return;
-    if (evt.target.status !== 200) return;
-    wrapper.innerHTML = evt.target.responseText;
-    //console.log(evt.target.readyState, evt.target.status,evt.target.responseText)
-  };
-  xhr.send();
+  loadTemplate("/src/pages/home/home.html", wrapper);
 }
