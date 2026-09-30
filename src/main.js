@@ -1,12 +1,13 @@
-import moment from 'moment/moment';
-import {images} from './datas'
+import moment from "moment/moment";
+import { promiseImage } from "./datas";
+import { loadImageSelectOptions } from "./pages/editor/editor";
 console.log("coucou");
 var wrapper;
 function LoadDate() {
   var footer = document.querySelector("footer");
   setInterval(function () {
     footer.innerHTML = new Date().toLocaleString();
-    moment().format('LLLL');
+    moment().format("LLLL");
   }, 1000);
 }
 
@@ -15,7 +16,10 @@ document.addEventListener("DOMContentLoaded", function () {
   wrapper = document.querySelector("#wrapper");
   initNavbar();
   constructMainRouteContent(location.pathname);
-  console.log('images',images );
+  promiseImage.then(images=>{
+      console.log("images", images);
+  })
+
 });
 
 function initNavbar() {
@@ -44,7 +48,16 @@ function constructMainRouteContent(path) {
   }
 }
 function loadDOMEditor() {
-  loadWrapperContent("/src/pages/editor/editor.html",()=>{console.log('j\'ai fini de charger le dom de editor')});
+  const promiseLoadingPage = loadWrapperContent(
+    "/src/pages/editor/editor.html",
+  );
+  promiseLoadingPage.then((r) => {
+    console.log(`fin de chargement`);
+  });
+  Promise.all([promiseImage,promiseLoadingPage]).then(arrayDesReponses=>{
+      console.log('tous les chargements sont effectues',arrayDesReponses )
+      loadImageSelectOptions(arrayDesReponses[0])
+  })
 }
 function loadDOMThumbnail() {
   loadWrapperContent("/src/pages/thumbnail/thumbnail.html");
@@ -56,18 +69,14 @@ function loadDOMHome() {
  * fonction de chargement du wrapper par une page html prevenant d'un adresse en param
  * @param {string} pageUrl url de la page html a chargé par appel http
  * @param {Function?} callback execution post chargement DOM
- * @returns {void} aucun retour
+ * @returns {Promise<HTMLElement>} aucun retour
  */
-const loadWrapperContent = (pageUrl, callback) => {
+const loadWrapperContent = (pageUrl) => {
   const promise = fetch(pageUrl).then((response) => {
     return response.text();
   });
-  promise.then((html) => {
+  return promise.then((html) => {
     wrapper.innerHTML = html;
-    if(callback){
-
-      callback();
-    }
+    return wrapper;
   });
 };
-
