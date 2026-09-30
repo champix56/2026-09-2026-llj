@@ -40,12 +40,21 @@ function constructMainRouteContent(path) {
   }
 }
 function loadDOMEditor() {
-  wrapper.innerHTML = "<h1>Editor</h1>";
+    loadWrapperContent('/src/pages/editor/editor.html')
+
 }
 function loadDOMThumbnail() {
-  wrapper.innerHTML = "<h1>Thumbnail</h1>";
+  loadWrapperContent('/src/pages/thumbnail/thumbnail.html')
 }
 function loadDOMHome() {
- const promise=fetch('/src/pages/home/home.html').then((response)=>{return response.text()})
+  loadWrapperContent('/src/pages/home/home.html')
+}
+/**
+ * fonction de chargement du wrapper par une page html prevenant d'un adresse en param
+ * @param {string} pageUrl url de la page html a chargé par appel http
+ * @returns {void} aucun retour
+ */
+const loadWrapperContent=(pageUrl)=>{
+ const promise=fetch(pageUrl).then((response)=>{return response.text()})
  promise.then(html=>{wrapper.innerHTML =html;})
 }
